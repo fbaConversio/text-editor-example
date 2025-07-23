@@ -18,6 +18,10 @@ import { CheckListPlugin } from "@lexical/react/LexicalCheckListPlugin";
 import { ClickableLinkPlugin } from "@lexical/react/LexicalClickableLinkPlugin";
 import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
+import { HistoryToolbarPlugin } from "@/components/editor/plugins/toolbar/history-toolbar-plugin";
+import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
+import { FloatingTextFormatToolbarPlugin } from "@/components/editor/plugins/floating-text-format-plugin";
+import { FloatingLinkEditorPlugin } from "@/components/editor/plugins/floating-link-editor-plugin";
 
 export function Plugins({ editable }: { editable: boolean }) {
   const [floatingAnchorElem, setFloatingAnchorElem] =
@@ -48,7 +52,9 @@ export function Plugins({ editable }: { editable: boolean }) {
               <FontFormatToolbarPlugin format="italic" />
               <FontFormatToolbarPlugin format="underline" />
               <FontFormatToolbarPlugin format="strikethrough" />
+              <FontFormatToolbarPlugin format="code" />
               <LinkToolbarPlugin />
+              <HistoryToolbarPlugin />
             </div>
           )}
         </ToolbarPlugin>
@@ -73,6 +79,10 @@ export function Plugins({ editable }: { editable: boolean }) {
         <ClickableLinkPlugin />
         <LinkPlugin />
         <AutoLinkPlugin />
+        <HistoryPlugin />
+        <FloatingTextFormatToolbarPlugin anchorElem={floatingAnchorElem} />
+
+        <FloatingLinkEditorPlugin anchorElem={floatingAnchorElem} />
         {/* rest of the plugins */}
       </div>
     </div>

@@ -18,6 +18,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Plugins } from "./plugins";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { LinkNode, AutoLinkNode } from "@lexical/link";
+import { FloatingLinkContext } from "@/components/editor/context/floating-link-context";
 
 const editorConfig: InitialConfigType = {
   namespace: "Editor",
@@ -63,7 +64,9 @@ export function Editor({
         }}
       >
         <TooltipProvider>
-          <Plugins editable={editable} />
+          <FloatingLinkContext>
+            <Plugins editable={editable} />
+          </FloatingLinkContext>
 
           <OnChangePlugin
             ignoreSelectionChange={true}
