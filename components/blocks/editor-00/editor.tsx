@@ -19,6 +19,7 @@ import { Plugins } from "./plugins";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { LinkNode, AutoLinkNode } from "@lexical/link";
 import { FloatingLinkContext } from "@/components/editor/context/floating-link-context";
+import { ToolbarPlugin } from "@/components/editor/plugins/toolbar/toolbar-plugin";
 
 const editorConfig: InitialConfigType = {
   namespace: "Editor",
@@ -63,19 +64,23 @@ export function Editor({
             : {}),
         }}
       >
-        <TooltipProvider>
-          <FloatingLinkContext>
-            <Plugins editable={editable} />
-          </FloatingLinkContext>
+        <ToolbarPlugin>
+          {() => (
+            <TooltipProvider>
+              <FloatingLinkContext>
+                <Plugins editable={editable} />
+              </FloatingLinkContext>
 
-          <OnChangePlugin
-            ignoreSelectionChange={true}
-            onChange={(editorState) => {
-              onChange?.(editorState);
-              onSerializedChange?.(editorState.toJSON());
-            }}
-          />
-        </TooltipProvider>
+              <OnChangePlugin
+                ignoreSelectionChange={true}
+                onChange={(editorState) => {
+                  onChange?.(editorState);
+                  onSerializedChange?.(editorState.toJSON());
+                }}
+              />
+            </TooltipProvider>
+          )}
+        </ToolbarPlugin>
       </LexicalComposer>
     </div>
   );

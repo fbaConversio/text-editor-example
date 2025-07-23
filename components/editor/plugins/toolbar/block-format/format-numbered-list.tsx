@@ -9,6 +9,7 @@ import {
 import { useToolbarContext } from "@/components/editor/context/toolbar-context";
 import { blockTypeToBlockName } from "@/components/editor/plugins/toolbar/block-format/block-format-data";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const BLOCK_FORMAT_VALUE = "number";
 
@@ -36,7 +37,7 @@ export function FormatNumberedList() {
     <Button
       variant="outline"
       size="icon"
-      className="!h-8 !w-8"
+      className={cn("!h-8 !w-8", blockType === "number" && "bg-secondary")}
       value={BLOCK_FORMAT_VALUE}
       onPointerDown={formatNumberedList}
     >

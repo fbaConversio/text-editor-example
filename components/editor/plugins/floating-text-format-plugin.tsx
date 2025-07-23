@@ -14,6 +14,7 @@ import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { mergeRegister } from "@lexical/utils";
 import {
+  $createParagraphNode,
   $getSelection,
   $isParagraphNode,
   $isRangeSelection,
@@ -28,6 +29,7 @@ import {
   CodeIcon,
   ItalicIcon,
   LinkIcon,
+  ListOrderedIcon,
   StrikethroughIcon,
   SubscriptIcon,
   SuperscriptIcon,
@@ -41,6 +43,14 @@ import { getSelectedNode } from "@/components/editor/utils/get-selected-node";
 import { setFloatingElemPosition } from "@/components/editor/utils/set-floating-elem-position";
 import { Separator } from "@/components/ui/separator";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { useToolbarContext } from "../context/toolbar-context";
+import {
+  INSERT_ORDERED_LIST_COMMAND,
+  INSERT_UNORDERED_LIST_COMMAND,
+} from "@lexical/list";
+import { FormatParagraph } from "./toolbar/block-format/format-paragraph";
+import { blockTypeToBlockName } from "./toolbar/block-format/block-format-data";
+import { $setBlocksType } from "@lexical/selection";
 
 function FloatingTextFormat({
   editor,
@@ -68,6 +78,7 @@ function FloatingTextFormat({
   setIsLinkEditMode: Dispatch<boolean>;
 }): JSX.Element {
   const popupCharStylesEditorRef = useRef<HTMLDivElement | null>(null);
+  const { activeEditor, blockType } = useToolbarContext();
 
   const insertLink = useCallback(() => {
     if (!isLink) {
@@ -189,6 +200,15 @@ function FloatingTextFormat({
     );
   }, [editor, $updateTextFormatFloatingToolbar]);
 
+  const formatParagraph = () => {
+    activeEditor.update(() => {
+      const selection = $getSelection();
+      if ($isRangeSelection(selection)) {
+        $setBlocksType(selection, () => $createParagraphNode());
+      }
+    });
+  };
+
   return (
     <div
       ref={popupCharStylesEditorRef}
@@ -258,6 +278,50 @@ function FloatingTextFormat({
               size="sm"
             >
               <LinkIcon className="h-4 w-4" />
+            </ToggleGroupItem>
+            <Separator orientation="vertical" />
+          </ToggleGroup>
+          <ToggleGroup
+            type="multiple"
+            defaultValue={[
+              blockType === "number" ? "number" : "",
+              blockType === "bullet" ? "bullet" : "",
+            ]}
+          >
+            <ToggleGroupItem
+              value="number"
+              aria-label="Toggle numbered list"
+              onClick={() => {
+                if (blockType !== "number") {
+                  activeEditor.dispatchCommand(
+                    INSERT_ORDERED_LIST_COMMAND,
+                    undefined
+                  );
+                } else {
+                  formatParagraph();
+                }
+              }}
+              size="sm"
+            >
+              {blockTypeToBlockName["number"].icon}
+            </ToggleGroupItem>
+
+            <ToggleGroupItem
+              value="bullet"
+              aria-label="Toggle bulleted list"
+              onClick={() => {
+                if (blockType !== "bullet") {
+                  activeEditor.dispatchCommand(
+                    INSERT_UNORDERED_LIST_COMMAND,
+                    undefined
+                  );
+                } else {
+                  formatParagraph();
+                }
+              }}
+              size="sm"
+            >
+              {blockTypeToBlockName["bullet"].icon}
             </ToggleGroupItem>
           </ToggleGroup>
         </>

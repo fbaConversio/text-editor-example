@@ -37,29 +37,25 @@ export function Plugins({ editable }: { editable: boolean }) {
     <div className="relative">
       {/* toolbar plugins */}
       {editable && (
-        <ToolbarPlugin>
-          {({ blockType }) => (
-            <div className="vertical-align-middle sticky top-0 z-10 flex gap-2 overflow-auto border-b p-1">
-              <FontFormatToolbarPlugin format="bold" />
-              <FontFormatToolbarPlugin format="italic" />
-              <FontFormatToolbarPlugin format="underline" />
-              <FontFormatToolbarPlugin format="strikethrough" />
+        <div className="vertical-align-middle sticky top-0 z-10 flex gap-2 overflow-auto border-b p-1">
+          <FontFormatToolbarPlugin format="bold" />
+          <FontFormatToolbarPlugin format="italic" />
+          <FontFormatToolbarPlugin format="underline" />
+          <FontFormatToolbarPlugin format="strikethrough" />
 
-              <FormatNumberedList />
-              <FormatBulletedList />
+          <FormatNumberedList />
+          <FormatBulletedList />
 
-              <LinkToolbarPlugin />
-              <HistoryToolbarPlugin />
+          <LinkToolbarPlugin />
+          <HistoryToolbarPlugin />
 
-              <BlockFormatDropDown>
-                <FormatParagraph />
-                <FormatHeading levels={["h1", "h2", "h3"]} />
+          <BlockFormatDropDown>
+            <FormatParagraph />
+            <FormatHeading levels={["h1", "h2", "h3"]} />
 
-                <FormatQuote />
-              </BlockFormatDropDown>
-            </div>
-          )}
-        </ToolbarPlugin>
+            <FormatQuote />
+          </BlockFormatDropDown>
+        </div>
       )}
 
       <div className="relative">
