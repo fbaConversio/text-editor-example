@@ -40,21 +40,23 @@ export function Plugins({ editable }: { editable: boolean }) {
         <ToolbarPlugin>
           {({ blockType }) => (
             <div className="vertical-align-middle sticky top-0 z-10 flex gap-2 overflow-auto border-b p-1">
-              <BlockFormatDropDown>
-                <FormatParagraph />
-                <FormatHeading levels={["h1", "h2", "h3"]} />
-                <FormatNumberedList />
-                <FormatBulletedList />
-                <FormatCheckList />
-                <FormatQuote />
-              </BlockFormatDropDown>
               <FontFormatToolbarPlugin format="bold" />
               <FontFormatToolbarPlugin format="italic" />
               <FontFormatToolbarPlugin format="underline" />
               <FontFormatToolbarPlugin format="strikethrough" />
-              <FontFormatToolbarPlugin format="code" />
+
+              <FormatNumberedList />
+              <FormatBulletedList />
+
               <LinkToolbarPlugin />
               <HistoryToolbarPlugin />
+
+              <BlockFormatDropDown>
+                <FormatParagraph />
+                <FormatHeading levels={["h1", "h2", "h3"]} />
+
+                <FormatQuote />
+              </BlockFormatDropDown>
             </div>
           )}
         </ToolbarPlugin>

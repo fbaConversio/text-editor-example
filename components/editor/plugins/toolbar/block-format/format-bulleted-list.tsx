@@ -8,7 +8,7 @@ import {
 
 import { useToolbarContext } from "@/components/editor/context/toolbar-context";
 import { blockTypeToBlockName } from "@/components/editor/plugins/toolbar/block-format/block-format-data";
-import { SelectItem } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 
 const BLOCK_FORMAT_VALUE = "bullet";
 
@@ -33,11 +33,14 @@ export function FormatBulletedList() {
   };
 
   return (
-    <SelectItem value={BLOCK_FORMAT_VALUE} onPointerDown={formatBulletedList}>
-      <div className="flex items-center gap-1 font-normal">
-        {blockTypeToBlockName[BLOCK_FORMAT_VALUE].icon}
-        {blockTypeToBlockName[BLOCK_FORMAT_VALUE].label}
-      </div>
-    </SelectItem>
+    <Button
+      variant="outline"
+      size="icon"
+      className="!h-8 !w-8"
+      value={BLOCK_FORMAT_VALUE}
+      onPointerDown={formatBulletedList}
+    >
+      {blockTypeToBlockName[BLOCK_FORMAT_VALUE].icon}
+    </Button>
   );
 }
