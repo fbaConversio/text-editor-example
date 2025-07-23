@@ -22,6 +22,7 @@ import { HistoryToolbarPlugin } from "@/components/editor/plugins/toolbar/histor
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { FloatingTextFormatToolbarPlugin } from "@/components/editor/plugins/floating-text-format-plugin";
 import { FloatingLinkEditorPlugin } from "@/components/editor/plugins/floating-link-editor-plugin";
+import { DraggableBlockPlugin } from "@/components/editor/plugins/draggable-block-plugin";
 
 export function Plugins({ editable }: { editable: boolean }) {
   const [floatingAnchorElem, setFloatingAnchorElem] =
@@ -79,7 +80,7 @@ export function Plugins({ editable }: { editable: boolean }) {
         <AutoLinkPlugin />
         <HistoryPlugin />
         <FloatingTextFormatToolbarPlugin anchorElem={floatingAnchorElem} />
-
+        <DraggableBlockPlugin anchorElem={floatingAnchorElem} />
         <FloatingLinkEditorPlugin anchorElem={floatingAnchorElem} />
         {/* rest of the plugins */}
       </div>
