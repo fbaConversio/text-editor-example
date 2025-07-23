@@ -13,8 +13,8 @@ export const editorTheme: EditorThemeClasses = {
     h5: "scroll-m-20 text-lg font-semibold tracking-tight",
     h6: "scroll-m-20 text-base font-semibold tracking-tight",
   },
-  paragraph: "leading-7 [&:not(:first-child)]:mt-6",
-  quote: "mt-6 border-l-2 pl-6 italic",
+  paragraph: "leading-7 [&:not(:first-child)]:mt-4",
+  quote: "mt-4 border-l-2 pl-6 italic",
   link: "text-blue-600 hover:underline hover:cursor-pointer",
   list: {
     checklist: "relative",
@@ -26,7 +26,7 @@ export const editorTheme: EditorThemeClasses = {
     nested: {
       listitem: "list-none before:hidden after:hidden",
     },
-    ol: "list-decimal my-6",
+    ol: "list-decimal my-4",
     olDepth: [
       "list-outside !list-decimal",
       "list-outside !list-[upper-roman]",
@@ -34,7 +34,7 @@ export const editorTheme: EditorThemeClasses = {
       "list-outside !list-[upper-alpha]",
       "list-outside !list-[lower-alpha]",
     ],
-    ul: "m-0 p-0 list-outside list-disc my-6",
+    ul: "m-0 p-0 list-outside list-disc my-4",
   },
   hashtag: "text-blue-600 bg-blue-100 rounded-md px-1",
   text: {
